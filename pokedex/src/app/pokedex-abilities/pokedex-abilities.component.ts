@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
+import { PokedexCardService } from '../pokedex-card/pokedex-card.service'
+
 @Component({
   selector: 'app-pokedex-abilities',
   templateUrl: './pokedex-abilities.component.html',
@@ -7,12 +9,17 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class PokedexAbilitiesComponent implements OnInit {
 
-  idPokemon: any;
+  namePokemon: any;
+  conteudoPokemon: any;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private API: PokedexCardService) {
     this.route.params.subscribe(ret =>{
       console.log(ret);
-      this.idPokemon = ret.id
+      this.namePokemon = ret.id;
+
+      // this.API.listAbilities(this.namePokemon).subscribe(ret => console.log(ret))
+      this.API.listAbilities(this.namePokemon).subscribe(ret => this.conteudoPokemon = ret)
+
     })
    }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { tap, delay, map } from 'rxjs/operators'
+import { tap, map } from 'rxjs/operators'
 import { environment } from '../../environments/environment'
 import { Pokemon } from  './pokemon'
 
@@ -16,8 +16,7 @@ export class PokedexCardService {
   list(){
     return this.http.get(this.API)
     .pipe(
-      delay(2000),
-      map(response=>response.results),
+      map((response: any) => response.results ),
       tap(console.log)
     );
   }
@@ -25,8 +24,7 @@ export class PokedexCardService {
   listAbilities(name: string){
     return this.http.get(`${this.API}/${name}`)
     .pipe(
-      delay(2000),
-      map(response=>response.abilities),
+      map(response=>response),
       tap(console.log)
     );
   }

@@ -1,1 +1,15 @@
-<h1>pokedex-abilities works!</h1>
+<div class="container">
+  <div ng-if="conteudoPokemon">
+    <article>
+      <h2 class="title">{{ conteudoPokemon.name }}</h2>
+      <div>
+        <img [src]="conteudoPokemon.sprites.front_default" alt="">
+        <img [src]="conteudoPokemon.sprites.back_default" alt="" class="float-right">
+      </div>
+
+      <h2 class="title">Abilities</h2>
+      <p *ngFor="let item of conteudoPokemon.abilities" > {{ item.ability.name}} </p>
+    </article>
+  </div>
+</div>
+

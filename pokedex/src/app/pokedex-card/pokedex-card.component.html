@@ -1,6 +1,6 @@
 <!-- <p>pokedex-card works!</p> -->
 
-<mat-grid-list cols="2" rowHeight="2:1">
+<mat-grid-list cols="5" rowHeight="2:1">
   <mat-grid-tile *ngFor="let item of pokemons$ | async">
     <mat-card-content (click)="teste(item.name)">
       <mat-card class="example-card">
@@ -11,6 +11,8 @@
     </mat-card-content>
   </mat-grid-tile>
 </mat-grid-list>
+<button mat-raised-button color="accent">Next</button>
+<button mat-raised-button color="accent">Previous</button>
 
 
 
