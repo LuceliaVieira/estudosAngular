@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PokedexCardService } from './pokedex-card.service'
 import { Pokemon } from './pokemon'
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -15,19 +16,19 @@ export class PokedexCardComponent implements OnInit {
 
   pokemons$!: Observable<Pokemon[]>;
 
-  constructor(private service:PokedexCardService) { }
+  constructor(private service:PokedexCardService, private route: Router) { }
 
   ngOnInit(): void {
 
     this.pokemons$ = this.service.list();
 
-    // this.service.list()
-    // .subscribe(results => console.log(this.pokemons = results));
   }
 
   teste(name: string){
     this.service.listAbilities(name)
-    .subscribe(results => console.log(this.pokemons = results))
+    .subscribe(ability => console.log(this.pokemons = ability))
+
+    this.route.navigate(['/pokemon/' + name])
   }
 
 
