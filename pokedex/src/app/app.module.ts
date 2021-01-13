@@ -15,6 +15,7 @@ import { MatGridListModule } from '@angular/material/grid-list'
 
 import { PokedexHeaderComponent } from './pokedex-header/pokedex-header.component';
 import { PokedexAbilitiesComponent } from './pokedex-abilities/pokedex-abilities.component';
+import { MatFormFieldModule } from '@angular/material/form-field'
 
 import { MatExpansionModule } from '@angular/material/expansion'
 
@@ -35,7 +36,8 @@ import { MatExpansionModule } from '@angular/material/expansion'
     MatGridListModule,
     HttpClientModule,
     CarouselModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

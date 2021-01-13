@@ -16,6 +16,20 @@ export class PokedexAbilitiesComponent implements OnInit {
   descriptionAbilities: any;
   panelOpenState = false;
 
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
   constructor(private route: ActivatedRoute, private API: PokedexCardService) {
     this.route.params.subscribe(ret =>{
         console.log(ret);
@@ -55,8 +69,17 @@ export class PokedexAbilitiesComponent implements OnInit {
     nav: true
   }
 
+  // descriptionAbility(conteudoPokemon: any){
+  //   console.log(conteudoPokemon.ability.url);
+  //    return this.API.listDescriptionAbilities(conteudoPokemon.ability.url).subscribe(resp=>console.log(resp));
+
+  // }
+
   descriptionAbility(url: string){
+    //console.log("url", url);
     return this.API.listDescriptionAbilities(url).subscribe(resp=>this.descriptionAbilities = resp);
+    //return this.API.listDescriptionAbilities(url).subscribe(resp=>console.log(resp));
+
   }
 }
 

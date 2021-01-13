@@ -17,23 +17,23 @@ export class PokedexCardService {
     return this.http.get(this.API)
     .pipe(
       map((response: any) => response ),
-      tap(console.log)
+      //tap(console.log)
     );
   }
 
   listAbilities(name: string){
     return this.http.get(`${this.API}/${name}`)
     .pipe(
-      map(response=>response),
-      tap(console.log)
+      map((response:any)=>response),
+      //tap(console.log)
     );
   }
 
   listDescriptionAbilities(url: string){
     return this.http.get(url)
     .pipe(
-      map(response=>response),
-      tap(console.log)
+      map((response:any)=>response),
+      //tap(console.log)
     )
   }
 }
