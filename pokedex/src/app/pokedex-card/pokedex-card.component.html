@@ -1,8 +1,8 @@
 <!-- <p>pokedex-card works!</p> -->
 
 <mat-grid-list cols="5" rowHeight="2:1">
-  <mat-grid-tile *ngFor="let item of pokemons$ | async">
-    <mat-card-content (click)="teste(item.name)">
+  <mat-grid-tile *ngFor="let item of pokemons$.results ">
+    <mat-card-content (click)="abilities(item.name)">
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>{{ item.name }}</mat-card-title>
@@ -11,8 +11,7 @@
     </mat-card-content>
   </mat-grid-tile>
 </mat-grid-list>
-<button mat-raised-button color="accent">Next</button>
-<button mat-raised-button color="accent">Previous</button>
 
-
+<!-- <button mat-raised-button color="accent" *ngIf="pokemons$.previous !== null && pokemons$.previous !== '' " (click)="pagination(pokemons$.previous)">Previous</button>
+<button mat-raised-button color="accent" *ngIf="pokemons$.next !== null && pokemons$.next !== '' " (click)="pagination(pokemons$.next)">Next</button> -->
 

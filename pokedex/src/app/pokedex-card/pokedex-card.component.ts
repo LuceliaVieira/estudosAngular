@@ -16,21 +16,29 @@ export class PokedexCardComponent implements OnInit {
 
   pokemons$!: Observable<Pokemon[]>;
 
+  error: any;
+
+  dadosAPI: any;
+
   constructor(private service:PokedexCardService, private route: Router) { }
 
   ngOnInit(): void {
 
-    this.pokemons$ = this.service.list();
+    //this.pokemons$ = this.service.list();
+
+    this.service.list()
+    .subscribe(pokemon => console.log(this.pokemons$ = pokemon));
 
   }
 
-  teste(name: string){
+  abilities(name: string){
     this.service.listAbilities(name)
     .subscribe(ability => console.log(this.pokemons = ability))
 
     this.route.navigate(['/pokemon/' + name])
   }
 
+  pagination(numberPage: number){
 
-
+  }
 }

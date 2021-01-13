@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { tap, map } from 'rxjs/operators'
 import { environment } from '../../environments/environment'
-import { Pokemon } from  './pokemon'
+// import { Pokemon } from  './pokemon'
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class PokedexCardService {
   list(){
     return this.http.get(this.API)
     .pipe(
-      map((response: any) => response.results ),
+      map((response: any) => response ),
       tap(console.log)
     );
   }
@@ -27,5 +27,13 @@ export class PokedexCardService {
       map(response=>response),
       tap(console.log)
     );
+  }
+
+  listDescriptionAbilities(url: string){
+    return this.http.get(url)
+    .pipe(
+      map(response=>response),
+      tap(console.log)
+    )
   }
 }

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'
+import { CarouselModule } from 'ngx-owl-carousel-o'
 
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIconModule } from '@angular/material/icon';
@@ -14,6 +15,8 @@ import { MatGridListModule } from '@angular/material/grid-list'
 
 import { PokedexHeaderComponent } from './pokedex-header/pokedex-header.component';
 import { PokedexAbilitiesComponent } from './pokedex-abilities/pokedex-abilities.component';
+
+import { MatExpansionModule } from '@angular/material/expansion'
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { PokedexAbilitiesComponent } from './pokedex-abilities/pokedex-abilities
     MatIconModule,
     MatCardModule,
     MatGridListModule,
-    HttpClientModule
+    HttpClientModule,
+    CarouselModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

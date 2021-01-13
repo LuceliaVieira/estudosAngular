@@ -2,14 +2,32 @@
   <div ng-if="conteudoPokemon">
     <article>
       <h2 class="title">{{ conteudoPokemon.name }}</h2>
-      <div>
-        <img [src]="conteudoPokemon.sprites.front_default" alt="">
-        <img [src]="conteudoPokemon.sprites.back_default" alt="" class="float-right">
+      <div class="teste">
+        <owl-carousel-o [options]="customOptions" >
+          <ng-template carouselSlide><img [src]="conteudoPokemon.sprites.front_default" alt="Front View" style="width: 71%; margin-left: 15%;"></ng-template>
+          <ng-template carouselSlide><img [src]="conteudoPokemon.sprites.back_default" alt="Back View" style="width: 71%; margin-left: 15%;"></ng-template>
+          <ng-template carouselSlide><img [src]="conteudoPokemon.sprites.front_shiny" alt="Front View Shiny" style="width: 71%; margin-left: 15%;"></ng-template>
+          <ng-template carouselSlide><img [src]="conteudoPokemon.sprites.back_shiny" alt="Back View Shiny" style="width: 71%; margin-left: 15%;"></ng-template>
+
+        </owl-carousel-o>
       </div>
 
-      <h2 class="title">Abilities</h2>
-      <p *ngFor="let item of conteudoPokemon.abilities" > {{ item.ability.name}} </p>
-    </article>
-  </div>
-</div>
+        <h3 class="title">Abilities</h3>
+        <!-- <p *ngFor="let item of conteudoPokemon.abilities" (click)="descriptionAbility(item.ability.url)"> {{ item.ability.name}}: </p>
+        <p>{{ descriptionAbilities }}</p> -->
 
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngFor="let item of conteudoPokemon.abilities" >
+          <mat-expansion-panel-header (click)="descriptionAbility(item.ability.url)">
+            <mat-panel-title >
+              <span style="text-align: center;">{{ item.ability.name}}</span>
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>{{ descriptionAbilities.effect_entries[1].effect }}</p>
+        </mat-expansion-panel>
+      </article>
+    </div>
+  </div>
