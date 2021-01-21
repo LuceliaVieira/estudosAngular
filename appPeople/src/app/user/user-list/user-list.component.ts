@@ -1,4 +1,8 @@
+import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subject, EMPTY } from 'rxjs';
+import { Principal } from '../principal';
+import { User } from '../user';
 import { UserService } from '../user.service'
 
 @Component({
@@ -10,20 +14,33 @@ export class UserListComponent implements OnInit {
 
   users: any;
   localStorageUsers: any = localStorage.getItem("users");
-  constructor(private serviceListUsers: UserService) { }
+  users$: Observable<User[]>;
+  error$: Subject<Object> = new Subject<Object>();
 
-  ngOnInit() {
-    console.log(this.localStorageUsers);
-    if(this.localStorageUsers === " " || this.localStorageUsers === undefined || this.localStorageUsers === null){
-      this.serviceListUsers.list()
-      .subscribe(data => this.users = data);
-      console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA")
-    } else {
-      this.users = JSON.parse(this.localStorageUsers);
+  constructor(private serviceListUsers: UserService){ }
 
-      console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-    }
+  ngOnInit(): any {
 
+    this.refresh();
   }
 
+  refresh(){
+    if(this.localStorageUsers === " " || this.localStorageUsers === undefined || this.localStorageUsers === null){
+      this.serviceListUsers.list()
+      .pipe(
+        catchError(error => {
+          console.error(error);
+          this.error$.next(true);
+          return EMPTY;
+        })
+      )
+      .subscribe(data => {
+        this.users$ = data;
+      });
+
+    } else {
+      this.users$ = JSON.parse(this.localStorageUsers);
+      console.log("aaa", this.users$);
+    }
+  }
 }

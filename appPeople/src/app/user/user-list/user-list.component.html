@@ -1,38 +1,59 @@
 <section>
   <div class="container">
-    <p>
-      <a class="btn btn-outline-secondary float-right" [routerLink]="['new']">Add New User</a>
-    </p>
+    <div class="card mt-5">
+      <div class="card-header">
+        <div class="float-left">
+          <h5>Users</h5>
+        </div>
+        <div class="float-right">
+          <a class="btn btn-outline-primary mr-2" [routerLink]="['new']" >Add new user</a>
+          <button class="btn btn-outline-primary"  (click)="refresh()" >Refresh</button>
+        </div>
+      </div>
+      <div class="card-body row">
+        <table class="table table-hover col" *ngIf="users$ as users; else loadingError"  >
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Avatar</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of users.data">
+            <tr>
+              <td>{{ item.id }}</td>
+              <td>{{ item.first_name }}</td>
+              <td>{{ item.last_name }}</td>
+              <td>{{ item.email }}</td>
+              <td><img src="{{ item.avatar }}"></td>
+              <td><a class="btn btn-outline-info">Update</a></td>
+              <td><a class="btn btn-outline-warning">Delete</a></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <nav aria-label="Page navigation example" class="d-flex justify-content-center" style="width: 100% !important">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+            </nav>
+          </tfoot>
+        </table>
+
+        <ng-template #loadingError>
+          <div *ngIf="error$ | async; else loading ">
+            Erro ao carregar Usuários. Tente novamente mais tarde.
+          </div>
+          <ng-template #loading>
+            <span>Loading users....</span>
+          </ng-template>
+        </ng-template>
+      </div>
+    </div>
   </div>
-  <table class="table">
-  <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Avatar</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let item of users.data">
-      <tr>
-        <td>{{ item.id }}</td>
-        <td>{{ item.first_name }}</td>
-        <td>{{ item.last_name }}</td>
-        <td>{{ item.email }}</td>
-        <td><img src="{{ item.avatar }}"></td>
-      </tr>
-    </tbody>
-    <tfoot >
-    </tfoot>
-  </table>
-  <nav aria-label="Page navigation example" class="d-flex justify-content-center" style="width: 100% !important">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-  </nav>
 </section>
